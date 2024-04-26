@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <section class="flex justify-center py-6 px-4 rounded-lg flex-col gap-3 min-w-2xl max-w-3xl">
+          <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">{{ post.title }}</h1>
+          
+          <article class="flex flex-col gap-3 w-full min-h-[88vh]">
+            {% if post.author.username == current_user.username %}
+                <a href="{{ url_for('update_post', post_id=post.id) }}" class="bg-slate-900 w-fit p-4 rounded-lg shadow-lg hover:opacity-70 hover:transition-all hover:bg-slate-950">
+                    <h2 class="text-2xl text-slate-50 font-bold antialiased">Edit Post</h2>
+                </a>
+            {% endif %}
+              <p class="text-slate font-light mt-1">Author: <b class="text-blue-500">{{ post.author.username }}</b></p>
+              <p class="text-slate font-light mt-1">Created: <b class="text-blue-500" id="date_posted">{{ post.date_posted }}</b></p>
+               {% for p in post.content.split('\n') %}
+                    <p class="text-slate font-light mt-2 leading-lg">{{ p | urlize }}</p>
+               {% endfor %}
+          </article>
+    </section>
+
+    <script>
+        const datePosted = document.getElementById('date_posted');
+        const date = new Date(datePosted.innerText);
+        datePosted.innerText = date.toDateString();
+    </script>
+{% endblock content %}

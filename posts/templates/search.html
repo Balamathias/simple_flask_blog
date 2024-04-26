@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+   <div class="flex flex-col gap-4 min-h-[85vh] py-2">
+    <h1 class="py-2 text-2xl font-semibold">Search results for <b class="text-blue-500">{{search}}</b>.</h1>
+    {% if posts %}
+    <section class="flex flex-col gap-5 w-full min-h-[88vh] mt-2">
+        {% for post in posts %}
+             <a href="{{ url_for('post_detail', post_id=post.id) }}" class="bg-slate-950 p-4 rounded-lg shadow-lg hover:opacity-70 hover:transition-all hover:bg-slate-950">
+                  <h2 class="text-2xl text-slate-50 font-bold antialiased">{{ post.title }}</h2>
+                  <p class="text-slate font-light mt-2">{{ post.content[:200] }}...</p>
+                  <p class="text-slate font-light mt-1">Author: <b class="text-blue-500">{{ post.author.username }}</b></p>
+             </a>
+        {% endfor %}
+    </section>
+    {% else %}
+        <p class="text-base py-4">No post matched the search query <i class="text-slate-200">{{search}}</i>.</p>
+    {% endif %}
+   </div>
+{% endblock %}

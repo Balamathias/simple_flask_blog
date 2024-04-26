@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="flex justify-center py-6 px-4 rounded-lg shadow-lg flex-col gap-3 min-w-2xl max-w-3xl min-h-[84vh]">
+          <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">Login</h1>
+          <form action="" method="POST" class="flex flex-col gap-4">
+               
+
+               {{ form.hidden_tag() }}
+
+               {{ form.csrf_token }}
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.email.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.email(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+
+                    {% if form.email.errors %}
+                         <ul>
+                              {% for error in form.email.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.password.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.password(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+
+                    {% if form.password.errors %}
+                         <ul>
+                              {% for error in form.password.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="">
+                    {{ form.remember_me(class="text-slate-50") }}
+                    {{ form.remember_me.label(class="text-slate-50 text-md font-semibold my-2") }}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px] my-4">
+                    {{ form.submit(class="p-4 rounded-md hover:bg-blue-700 cursor-pointer items-center text-slate-50 bg-blue-600 shadow-md ") }}
+               </div>
+          </form>
+
+          <div class="flex flex-col py-2 gap-2">
+               <p>Don't have an account? <a href="{{ url_for('register') }}" class="text-blue-500 hover:underline">Register</a></p>
+               <p>Forgot your password? <a href="{{ url_for('forgot_password') }}" class="text-blue-500 hover:underline">Reset Password</a></p>
+          </div>
+     </section>
+{% endblock %}

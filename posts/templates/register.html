@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="flex justify-center py-6 px-4 rounded-lg shadow-lg flex-col gap-3 min-w-2xl max-w-3xl">
+          <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">Register</h1>
+          <form action="" method="POST" class="flex flex-col gap-4">
+               
+
+               {{ form.hidden_tag() }}
+
+               {{ form.csrf_token }}
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.username.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.username(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+                    {% if form.username.errors %}
+                         <ul>
+                              {% for error in form.username.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.email.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.email(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+
+                    {% if form.email.errors %}
+                         <ul>
+                              {% for error in form.email.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.password.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.password(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+
+                    {% if form.password.errors %}
+                         <ul>
+                              {% for error in form.password.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px]">
+                    {{ form.confirm_password.label(class="text-slate-50 text-md font-semibold my-2") }}
+                    {{ form.confirm_password(class="p-4 rounded-md items-center text-slate-50 shadow-md bg-slate-900 hover:bg-slate-800 ") }}
+
+                    {% if form.confirm_password.errors %}
+                         <ul>
+                              {% for error in form.confirm_password.errors %}
+                                   <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                              {% endfor %}
+                         </ul>
+                    {% endif %}
+               </div>
+               <div class="flex flex-col gap-2 max-w-[600px] my-4">
+                    {{ form.submit(class="p-4 rounded-md hover:bg-blue-700 cursor-pointer items-center text-slate-50 bg-blue-600 shadow-md ") }}
+               </div>
+          </form>
+
+          <div >
+               <p>Already have an account? <a href='{{ url_for("login") }}' class="text-blue-500">Login</a></p>
+          </div>
+     </section>
+{% endblock %}

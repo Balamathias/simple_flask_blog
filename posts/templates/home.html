@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="flex justify-center py-6 px-4 rounded-lg flex-col gap-3 min-w-2xl max-w-3xl">
+          {% if current_user.is_authenticated %}
+               <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">Welcome back <b class="font-semibold text-blue-500">{{ current_user.username }}</b>!</h1>
+          {% else %}
+               <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">Posts!</h1>
+          {% endif %}
+          
+          <section class="flex flex-col gap-5 w-full min-h-[88vh]">
+               {% for post in posts %}
+                    <a href="{{ url_for('post_detail', post_id=post.id) }}" class="bg-slate-950 p-4 rounded-lg shadow-lg hover:opacity-70 hover:transition-all hover:bg-slate-950">
+                         <h2 class="text-2xl text-slate-50 font-bold antialiased">{{ post.title }}</h2>
+                         <p class="text-slate font-light mt-2">{{ post.content[:200] }}...</p>
+                         <p class="text-slate font-light mt-1">Author: <b class="text-blue-500">{{ post.author.username }}</b></p>
+                    </a>
+               {% endfor %}
+          </section>
+     </section>
+{% endblock %}

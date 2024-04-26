@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="py-4 flex flex-col gap-3">
+    <h1 class="font-semibold antialiased text-3xl py-2">New Post</h1>
+
+    <form action="" method="POST" class="flex flex-col gap-4">
+        {{ form.hidden_tag() }}
+
+        {{ form.csrf_token }}
+        <div class="flex flex-col gap-2 max-w-[600px]">
+             {{ form.title.label(class="text-slate-50 text-md font-semibold my-2") }}
+             {{ form.title(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+             {% if form.title.errors %}
+                  <ul>
+                       {% for error in form.title.errors %}
+                            <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                       {% endfor %}
+                  </ul>
+             {% endif %}
+        </div>
+        <div class="flex flex-col gap-2 max-w-[600px]">
+             {{ form.content.label(class="text-slate-50 text-md font-semibold my-2") }}
+             {{ form.content(class="p-4 rounded-md items-center min-h-[400px] text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+
+             {% if form.content.errors %}
+                  <ul>
+                       {% for error in form.content.errors %}
+                            <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                       {% endfor %}
+                  </ul>
+             {% endif %}
+        </div>
+        
+        <div class="flex flex-col gap-2 max-w-[600px] my-4">
+             {{ form.submit(class="p-4 rounded-md hover:bg-blue-700 cursor-pointer items-center text-slate-50 bg-blue-600 shadow-md ") }}
+        </div>
+   </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="min-h-[84vh] py-3">
+          <h1 class="text-3xl text-slate-50 font-bold antialiased my-4">Account</h1>
+
+          <section class="flex flex-col gap-3 shadow-md rounded-md ">
+               <div class="flex gap-3 items-center py-2">
+                    <img src="{{ profile_picture }}" alt="profile image" class="rounded-full object-cover h-24 w-24" />
+                    <div class="flex flex-col gap-3">
+                         <h2 class="text-2xl text-slate-50 font-bold antialiased">{{ current_user.username }}</h2>
+                         <p class="text-slate font-light mt-1">Email: <b class="text-blue-500">{{ current_user.email }}</b></p>
+                    </div>
+               </div>
+
+               <form action="" method="POST" class="flex flex-col gap-4" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+     
+                    {{ form.csrf_token }}
+                    <div class="flex flex-col gap-2 max-w-[600px]">
+                         {{ form.username.label(class="text-slate-50 text-md font-semibold my-2") }}
+                         {{ form.username(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+                         {% if form.username.errors %}
+                              <ul>
+                                   {% for error in form.username.errors %}
+                                        <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                                   {% endfor %}
+                              </ul>
+                         {% endif %}
+                    </div>
+                    <div class="flex flex-col gap-2 max-w-[600px]">
+                         {{ form.email.label(class="text-slate-50 text-md font-semibold my-2") }}
+                         {{ form.email(class="p-4 rounded-md items-center text-slate-50 bg-slate-900 shadow-md hover:bg-slate-900 ") }}
+     
+                         {% if form.email.errors %}
+                              <ul>
+                                   {% for error in form.email.errors %}
+                                        <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                                   {% endfor %}
+                              </ul>
+                         {% endif %}
+                    </div>
+                    <div class="flex flex-col gap-2 max-w-[600px]">
+                         {{ form.picture.label(class="text-slate-50 text-md font-semibold my-2") }}
+                         {{ form.picture(class="p-2 ") }}
+     
+                         {% if form.picture.errors %}
+                              <ul>
+                                   {% for error in form.picture.errors %}
+                                        <li class="text-red-500 mt-2 text-subtle">{{ error }}</li>
+                                   {% endfor %}
+                              </ul>
+                         {% endif %}
+                    </div>
+                    
+                    <div class="flex flex-col gap-2 max-w-[600px] my-4">
+                         {{ form.submit(class="p-4 rounded-md hover:bg-blue-700 cursor-pointer items-center text-slate-50 bg-blue-600 shadow-md ") }}
+                    </div>
+               </form>
+          </section>
+     </section>
+{% endblock %}
